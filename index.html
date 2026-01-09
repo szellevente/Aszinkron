@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="hu">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Recept lekérdezés - Promise</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 800px;
+            margin: 50px auto;
+            padding: 20px;
+            background-color: #f5f5f5;
+        }
+        h1 {
+            color: #333;
+            text-align: center;
+        }
+        .container {
+            background-color: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        .info {
+            background-color: #e3f2fd;
+            padding: 15px;
+            border-radius: 5px;
+            margin-bottom: 20px;
+        }
+        .console {
+            background-color: #1e1e1e;
+            color: #d4d4d4;
+            padding: 20px;
+            border-radius: 5px;
+            font-family: 'Courier New', monospace;
+            min-height: 200px;
+            overflow-y: auto;
+        }
+        .link {
+            display: block;
+            text-align: center;
+            margin-top: 20px;
+            padding: 10px;
+            background-color: #4CAF50;
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+        }
+        .link:hover {
+            background-color: #45a049;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🍲 Recept lekérdezés - Promise megoldás</h1>
+        
+        <div class="info">
+            <p><strong>Ez a példa Promise-okkal (.then() és .catch()) dolgozik.</strong></p>
+            <p>Nyisd meg a böngésző konzolt (F12) a részletes kimenet megtekintéséhez!</p>
+        </div>
+
+        <h2>Konzol kimenet:</h2>
+        <div class="console" id="console">
+            <p>Várakozás a lekérdezésre...</p>
+        </div>
+
+        <a href="async_await.html" class="link">👉 Nézd meg az async/await verziót</a>
+    </div>
+
+    <!-- Promise verzió betöltése -->
+    <script src="recept_promise.js"></script>
+    
+    <script>
+        // Konzol átirányítása a HTML oldalra
+        const consoleDiv = document.getElementById('console');
+        const originalLog = console.log;
+        const originalError = console.error;
+        
+        console.log = function(...args) {
+            originalLog.apply(console, args);
+            const p = document.createElement('p');
+            p.textContent = args.join(' ');
+            p.style.color = '#d4d4d4';
+            consoleDiv.appendChild(p);
+        };
+        
+        console.error = function(...args) {
+            originalError.apply(console, args);
+            const p = document.createElement('p');
+            p.textContent = args.join(' ');
+            p.style.color = '#f44336';
+            consoleDiv.appendChild(p);
+        };
+    </script>
+</body>
+</html>
